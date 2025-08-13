@@ -1,0 +1,66 @@
+<section>
+  <header class="header">
+    <h2>Produtos</h2>
+    <button type="button" (click)="goNew()">Novo Produto</button>
+  </header>
+
+  <form class="filters" (ngSubmit)="fetch()">
+    <input type="text" [(ngModel)]="search" name="search" placeholder="Buscar por código/descrição" />
+    <select [(ngModel)]="departmentCode" name="departmentCode">
+      <option value="">Todos departamentos</option>
+      <option *ngFor="let d of departments" [value]="d.code">{{ d.code }} - {{ d.description }}</option>
+    </select>
+    <select [(ngModel)]="isActive" name="isActive">
+      <option [ngValue]="''">Todos status</option>
+      <option [ngValue]="true">Ativo</option>
+      <option [ngValue]="false">Inativo</option>
+    </select>
+    <button type="submit">Filtrar</button>
+    <button type="button" (click)="resetFilters()">Limpar</button>
+  </form>
+
+  <div class="table-wrapper" *ngIf="!loading; else loadingTpl">
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Departamento</th>
+          <th>Preço</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of items">
+          <td>{{ p.code }}</td>
+          <td>{{ p.description }}</td>
+          <td>{{ p.departmentCode }}</td>
+          <td>{{ p.price | number:'1.2-2' }}</td>
+          <td>
+            <span class="badge" [class.active]="p.isActive" [class.inactive]="!p.isActive">
+              {{ p.isActive ? 'Ativo' : 'Inativo' }}
+            </span>
+          </td>
+          <td>
+            <button type="button" (click)="goEdit(p.id)">Editar</button>
+            <button type="button" (click)="confirmDelete(p.id)">Excluir</button>
+          </td>
+        </tr>
+        <tr *ngIf="items.length === 0">
+          <td colspan="6" style="text-align:center;">Nenhum registro encontrado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #loadingTpl>
+    <p>Carregando...</p>
+  </ng-template>
+
+  <footer class="pagination">
+    <button (click)="changePage(-1)">Anterior</button>
+    <span>Página {{ page }} de {{ totalPages }}</span>
+    <button (click)="changePage(1)">Próxima</button>
+  </footer>
+</section>

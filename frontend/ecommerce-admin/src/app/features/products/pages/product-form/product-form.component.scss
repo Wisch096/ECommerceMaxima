@@ -1,0 +1,39 @@
+.card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 800px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+small {
+    color: #b91c1c;
+}
+
+.check {
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+button {
+    cursor: pointer;
+}
