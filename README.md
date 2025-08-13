@@ -3,6 +3,8 @@
 
 Passo a passo para rodar **backend (.NET 8 + Dapper + PostgreSQL + Docker)** e **frontend (Angular 16)** do CRUD de Produtos.
 
+![Demo](docs/demo.gif)
+
 ---
 
 ## 📦 Pré-requisitos
