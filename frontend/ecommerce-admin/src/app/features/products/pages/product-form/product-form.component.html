@@ -1,43 +1,41 @@
-<section class="card">
-  <h2>{{ isEdit ? 'Editar Produto' : 'Novo Produto' }}</h2>
+<section class="card" style="padding:20px;">
+  <h2 style="margin:0 0 12px 0; font-size:20px;">{{ isEdit ? 'Editar Produto' : 'Novo Produto' }}</h2>
 
-  <form [formGroup]="form" (ngSubmit)="save()" novalidate>
-    <div class="grid">
-      <label>
-        <span>Código</span>
-        <input type="text" formControlName="code" [readonly]="isEdit" />
-        <small *ngIf="form.get('code')?.invalid && form.get('code')?.touched">Código é obrigatório (máx 50)</small>
-      </label>
+  <form [formGroup]="form" (ngSubmit)="save()" novalidate class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+    <label>
+      <span style="font-weight:600; color:var(--color-muted)">Código</span>
+      <input class="input" type="text" formControlName="code" [readonly]="isEdit" />
+      <small *ngIf="form.get('code')?.invalid && form.get('code')?.touched" style="color:var(--danger)">Código é obrigatório (máx 50)</small>
+    </label>
 
-      <label>
-        <span>Descrição</span>
-        <input type="text" formControlName="description" />
-        <small *ngIf="form.get('description')?.invalid && form.get('description')?.touched">Descrição é obrigatória (máx 255)</small>
-      </label>
+    <label>
+      <span style="font-weight:600; color:var(--color-muted)">Descrição</span>
+      <input class="input" type="text" formControlName="description" />
+      <small *ngIf="form.get('description')?.invalid && form.get('description')?.touched" style="color:var(--danger)">Descrição é obrigatória (máx 255)</small>
+    </label>
 
-      <label>
-        <span>Departamento</span>
-        <select formControlName="departmentCode">
-          <option value="">Selecione...</option>
-          <option *ngFor="let d of departments" [value]="d.code">{{ d.code }} - {{ d.description }}</option>
-        </select>
-        <small *ngIf="form.get('departmentCode')?.invalid && form.get('departmentCode')?.touched">Informe código de 3 dígitos</small>
-      </label>
+    <label>
+      <span style="font-weight:600; color:var(--color-muted)">Departamento</span>
+      <select class="select" formControlName="departmentCode">
+        <option value="">Selecione...</option>
+        <option *ngFor="let d of departments" [value]="d.code">{{ d.code }} - {{ d.description }}</option>
+      </select>
+      <small *ngIf="form.get('departmentCode')?.invalid && form.get('departmentCode')?.touched" style="color:var(--danger)">Informe código de 3 dígitos</small>
+    </label>
 
-      <label>
-        <span>Preço</span>
-        <input type="number" formControlName="price" step="0.01" min="0" />
-        <small *ngIf="form.get('price')?.invalid && form.get('price')?.touched">Preço deve ser ≥ 0</small>
-      </label>
+    <label>
+      <span style="font-weight:600; color:var(--color-muted)">Preço</span>
+      <input class="input" type="number" formControlName="price" step="0.01" min="0" />
+      <small *ngIf="form.get('price')?.invalid && form.get('price')?.touched" style="color:var(--danger)">Preço deve ser ≥ 0</small>
+    </label>
 
-      <label class="check">
-        <input type="checkbox" formControlName="isActive" /> Ativo
-      </label>
+    <label style="display:flex; align-items:center; gap:10px;">
+      <input type="checkbox" formControlName="isActive" /> <span>Ativo</span>
+    </label>
+
+    <div style="grid-column: 1 / -1; display:flex; gap:10px; justify-content:flex-end; margin-top:8px;">
+      <button type="button" class="btn" (click)="cancel()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
-
-    <footer class="actions">
-      <button type="submit">Salvar</button>
-      <button type="button" (click)="cancel()">Cancelar</button>
-    </footer>
   </form>
 </section>
