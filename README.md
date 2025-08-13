@@ -18,7 +18,7 @@ Passo a passo para rodar **backend (.NET 8 + Dapper + PostgreSQL + Docker)** e *
 
 ---
 
-## 🗂️ Estrutura (resumo)
+## 🗂️ Estrutura arquitetural (backend)
 
 ```
 ECommerce.Products/
