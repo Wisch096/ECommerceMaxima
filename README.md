@@ -79,49 +79,7 @@ Arquivo `src/ECommerce.Products.API/appsettings.json`:
 }
 ```
 
-### 4) CORS (mantendo duas políticas)
-No `Program.cs`, registre e use as políticas (ex.: **AllowLocal** e opcional **AllowFrontend**):
-
-```csharp
-// Registrar políticas de CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowLocal", policy =>
-        policy.WithOrigins(
-                "http://localhost:4200", // Angular
-                "http://localhost:5281", // outra origem local (http)
-                "https://localhost:5281" // outra origem local (https)
-            )
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials()
-    );
-
-    // Opcional: política para um domínio público de frontend
-    options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("https://seu-frontend.com")
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials()
-    );
-});
-
-var app = builder.Build();
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-// Use a política desejada (em dev, normalmente "AllowLocal"):
-app.UseCors("AllowLocal");
-
-// ... mapeamento de endpoints (app.MapGet/MapPost/etc.)
-
-app.Run();
-```
-
-> Se você usa um **header customizado** no frontend (ex.: `X-User` em um interceptor), o navegador fará **preflight (OPTIONS)**. Com a política acima, estará liberado.
-
-### 5) Rodar a API
+### 4) Rodar a API
 No diretório `src/ECommerce.Products.API`:
 
 ```bash
@@ -140,7 +98,7 @@ Acessos:
   - `PUT  /api/products/{id}`
   - `DELETE /api/products/{id}` (exclusão lógica)
 
-### 6) Testes
+### 5) Testes
 Na raiz da solution:
 
 ```bash
